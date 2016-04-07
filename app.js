@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-//var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
@@ -16,9 +15,7 @@ var redisStore = new RedisStore();
 
 var app = express();
 
-
-
-// var loginCallback = "http://" + process.env.APP_IP + ":" + process.env.PORT + "/readjson";
+//TODO: put below to config.js
 var appName = "readTrello";
 var appMain = '/readTrello';
 var appKey = 'a788a8642a5a25d1ad93d69280d9bcc5';
@@ -30,7 +27,6 @@ var queryByListIdStr = "1/lists/$/cards";
 var loginCallback = path.join("http://",process.env.APP_IP + ":" + process.env.PORT,'cb');
 console.log('loginCallback: ',loginCallback);
 
-
 app.locals.loginCallback = loginCallback;
 app.locals.appMain = appMain;
 app.locals.appName = appName;
@@ -41,6 +37,7 @@ app.locals.queryMemStr = queryMemStr;
 app.locals.queryByBoardIdStr = queryByBoardIdStr;
 app.locals.queryByListIdStr = queryByListIdStr;
 
+//=============== put above to config.js
 
 
 
@@ -53,7 +50,6 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 var sessionMiddleware = session({
   secret: 'WTF',
